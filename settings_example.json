@@ -1,0 +1,72 @@
+{
+    "app_name": "noctia",
+    "main_ip": "10.96.50.1",
+    "target": "rel",
+    "target_deploy_path": "/projects/deploys",
+
+    "server_name": "kubernetes.docker.internal",
+    "server_hostname": "kubernetes.docker.internal",
+    "server_address": "https://kubernetes.docker.internal",
+
+    "web_image": "php:8.2-fpm",
+    "mysql_image": "mariadb:11.7",
+    "ldap_image": "osixia/openldap:1.5.0",
+    "wiki_image": "mediawiki:1.43.0",
+    "shlink_image": "shlinkio/shlink:stable",
+    "jellyfin_image": "jellyfin/jellyfin:latest",
+
+    "img_pull_sec": "your-k8s-sec-for-docker-registry",
+
+    "ldap_ip": "",
+    "apache_ip": "",
+    "mariadb_ip": "10.96.50.1",
+    "wiki_ip": "10.96.50.2",
+    "shlink_ip": "10.96.50.3",
+    "owncast_ip": "",
+    "jellyfin_ip": "10.96.50.4",
+
+    "ldap_enable": false,
+    "apache_enable": false,
+    "mariadb_enable": true,
+    "wiki_enable": true,
+    "shlink_enable": true,
+    "owncast_enable": false,
+    "jellyfin_enable": true,
+
+    "mysql_root_pass": "pass",
+
+    "shlink_default_domain": "re.example.com",
+    "shlink_server_url": "https://re.example.com",
+    "shlink_server_api_key": "",
+    "shlink_is_https_enabled": "true",
+    "shlink_geolite_license_key": "",
+    "shlink_db_driver": "mariadb",
+    "shlink_db_name": "shlink",
+    "shlink_db_user": "user",
+    "shlink_db_password": "pass",
+    "shlink_db_host": "127.0.0.1",
+    "shlink_db_port": "3306",
+
+    "wiki_name": "Wiki",
+    "wiki_logo_path": "$wgResourceBasePath/images/default.png",
+    "wiki_url": "https://wiki.example.com",
+    "wiki_cache_secret": "secret",
+    "wiki_upgrade_key": "key",
+    "wiki_db_type": "mysql",
+    "wiki_db_name": "wiki",
+    "wiki_db_user": "user",
+    "wiki_db_pass": "pass",
+    "wiki_db_host": "127.0.0.1",
+    "wiki_db_port": "3306",
+
+    "ldap_organisation": "example",
+    "ldap_domain": "example.com",
+    "ldap_adming_pass": "pass",
+    "ldap_tls": "false",
+
+    "apache_ldap_bind_dn": "CN=admin,DC=example,DC=com",
+    "apache_ldap_bind_pass": "admin",
+    "apache_ldap_auth_url": "ldap://noctia-ldap:389/DC=example,DC=com?cn?sub?(objectClass=person)"
+
+
+}

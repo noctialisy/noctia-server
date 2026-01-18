@@ -1,0 +1,73 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${app_name}-jellyfin-service
+spec:
+  type: ClusterIP
+  clusterIP: ${jellyfin_ip}
+  selector:
+    app: ${app_name}-jellyfin-app
+  ports:
+    - name: "http"
+      protocol: TCP
+      port: 8096
+      targetPort: 8096
+    - name: "stream"
+      protocol: UDP
+      port: 7359
+      targetPort: 7359
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-jellyfin-app
+  labels:
+    app: ${app_name}-jellyfin-app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-jellyfin-app
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-jellyfin-app
+    spec:
+      volumes:
+      - name: ${app_name}-jellyfin-config
+        hostPath:
+          path: /projects/deploys/${app_name}-jellyfin-config
+
+      - name: ${app_name}-jellyfin-cache
+        hostPath:
+          path: /projects/deploys/${app_name}-jellyfin-cache
+
+      - name: ${app_name}-jellyfin-media
+        hostPath:
+          path: /projects/deploys/${app_name}-jellyfin-media
+
+      imagePullSecrets:
+        - name: ${img_pull_sec}
+        
+      containers:
+      - name: jellyfin
+        image: "${jellyfin_image}"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: ${app_name}-jellyfin-config
+            mountPath: /config
+          - name: ${app_name}-jellyfin-cache
+            mountPath: /cache
+          - name: ${app_name}-jellyfin-media
+            mountPath: /media
+        ports:
+          - name: "http"
+            containerPort: 8096
+          - name: "stream"
+            containerPort: 7359
+        #env:
+        #  - name: JELLYFIN_PublishedServerUrl
+        #    value: 

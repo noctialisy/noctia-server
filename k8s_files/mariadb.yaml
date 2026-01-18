@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${app_name}-mariadb
+spec:
+  type: ClusterIP
+  clusterIP: ${mariadb_ip}
+  selector:
+    app: ${app_name}-mariadb
+  ports:
+    - name: "mysql"
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-mariadb
+  labels:
+    app: ${app_name}-mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-mariadb
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-mariadb
+    spec:
+      volumes:
+      - name: ${app_name}-web-conf
+        configMap:
+          name: ${app_name}-web-conf
+
+      - name: ${app_name}-mysql-storage
+        hostPath:
+          path: "${target_deploy_path}/${app_name}-mysql-pv"
+
+      - name: ${app_name}-logs
+        hostPath:
+          path: "${target_deploy_path}/${app_name}-logs-pv"
+
+      imagePullSecrets:
+        - name: ${img_pull_sec}
+
+      containers:
+      - name: mysql
+        image: "${mysql_image}"
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "512M"
+        ports:
+          - name: "mysql-server"
+            containerPort: 3306
+        volumeMounts:
+          - name: ${app_name}-mysql-storage
+            mountPath: /var/lib/mysql
+          - name: ${app_name}-web-conf
+            mountPath: "/etc/mysql/mariadb.cnf"
+            subPath: "mariadb.cnf"
+          - name: ${app_name}-logs
+            mountPath: "/var/log"
+        env:
+          # Use secret in real usage
+          - name: MYSQL_ROOT_PASSWORD
+            value: ${mysql_root_pass}

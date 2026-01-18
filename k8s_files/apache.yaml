@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-apache-server
+  labels:
+    app: ${app_name}-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-apache-server
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-apache-server
+    spec:
+      volumes:
+      - name: ${app_name}-web-conf
+        configMap:
+          name: ${app_name}-web-conf
+
+      - name: ${app_name}-web-storage
+        hostPath:
+          path: "${target_deploy_path}/${app_name}-web-pv"
+
+      - name: ${app_name}-cert-storage
+        hostPath:
+          path: "${target_deploy_path}/${app_name}-cert-pv"
+
+      imagePullSecrets:
+        - name: ${img_pull_sec}
+
+      containers:
+      - name: php
+        image: "${web_image}"
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "512M"
+        ports:
+          - name: "php-server"
+            containerPort: 80
+          - name: "php-server-s"
+            containerPort: 443
+        
+        volumeMounts:
+          - name: ${app_name}-web-storage
+            mountPath: "/var/www/html/"
+          - name: ${app_name}-cert-storage
+            mountPath: "/etc/container_cert_local"
+          - name: ${app_name}-web-conf
+            mountPath: "/etc/apache2/apache2.conf"
+            subPath: "apache2.conf"
+          - name: ${app_name}-web-conf
+            mountPath: "/etc/apache2/mods-enabled/ssl.conf"
+            subPath: "ssl.conf"

@@ -1,0 +1,65 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${app_name}-shlink-service
+spec:
+  type: ClusterIP
+  clusterIP: ${shlink_ip}
+  selector:
+    app: ${app_name}-shlink-app
+  ports:
+    - name: "main"
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-shlink-app
+  labels:
+    app: ${app_name}-shlink-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-shlink-app
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-shlink-app
+    spec:
+      imagePullSecrets:
+        - name: ${img_pull_sec}
+      containers:
+      - name: main
+        image: "${shlink_image}"
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: "main-port"
+            containerPort: 8080
+        env:
+          - name: DEFAULT_DOMAIN
+            value: "${shlink_default_domain}"
+          - name: SHLINK_SERVER_URL
+            value: "${shlink_server_url}"
+          - name: SHLINK_SERVER_API_KEY
+            value: "${shlink_server_api_key}"
+          - name: IS_HTTPS_ENABLED
+            value: "${shlink_is_https_enabled}"
+          - name: GEOLITE_LICENSE_KEY
+            value: "${shlink_geolicense_key}"
+          - name: DB_DRIVER
+            value: "${shlink_db_driver}"
+          - name: DB_NAME
+            value: "${shlink_db_name}"
+          - name: DB_USER
+            value: "${shlink_db_user}"
+          - name: DB_PASSWORD
+            value: "${shlink_db_password}"
+          - name: DB_HOST
+            value: "${shlink_db_host}"
+          - name: DB_PORT
+            value: "${shlink_db_port}"

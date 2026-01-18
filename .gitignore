@@ -1,0 +1,17 @@
+app/*
+!app/defs
+
+dev/*
+k8s_deploys/*
+certs/*
+
+httpd/conf.d/.htpasswd
+httpd/conf.d/.htpasswd-personal
+httpd/conf.d/50-site.conf
+httpd/logs/*
+
+mariadb/dbstore/*
+mariadb/dbbase/*
+
+docker_secr.yaml
+settings.json

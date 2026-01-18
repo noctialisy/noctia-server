@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-ldap-server
+  labels:
+    app: ${app_name}-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-ldap-server
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-ldap-server
+    spec:
+      volumes:
+      - name: ${app_name}-ldap-storage
+        hostPath:
+          path: "${target_deploy_path}/${app_name}-ldap-pv"
+
+      - name: ${app_name}-ldap-storage-config
+        hostPath:
+          path: "${target_deploy_path}/${app_name}-ldap-config-pv"
+
+      imagePullSecrets:
+        - name: ${img_pull_sec}
+
+      containers:
+      - name: ldap
+        image: ${ldap_image}
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "64M"
+        ports:
+          - name: "ldap-server"
+            containerPort: 389
+        volumeMounts:
+          - name: ${app_name}-ldap-storage
+            mountPath: /var/lib/ldap
+          - name: ${app_name}-ldap-storage-config
+            mountPath: /etc/ldap/slap.d
+        env:
+          - name: LDAP_ORGANISATION
+            value: "${ldap_organisation}"
+          - name: LDAP_DOMAIN
+            value: "${ldap_domain}"
+          - name: LDAP_ADMIN_PASSWORD
+            value: "${ldap_adming_pass}"
+          - name: LDAP_TLS
+            value: "${ldap_tls}"
