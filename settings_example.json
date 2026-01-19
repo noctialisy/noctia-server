@@ -14,24 +14,30 @@
     "wiki_image": "mediawiki:1.43.0",
     "shlink_image": "shlinkio/shlink:stable",
     "jellyfin_image": "jellyfin/jellyfin:latest",
+    "postgres_image": "mirror.gcr.io/postgres:17",
+    "keycloak_image": "quay.io/keycloak/keycloak:26.5.1",
 
     "img_pull_sec": "your-k8s-sec-for-docker-registry",
 
     "ldap_ip": "",
     "apache_ip": "",
-    "mariadb_ip": "10.96.50.1",
-    "wiki_ip": "10.96.50.2",
-    "shlink_ip": "10.96.50.3",
+    "mariadb_ip": "",
+    "wiki_ip": "",
+    "shlink_ip": "",
     "owncast_ip": "",
-    "jellyfin_ip": "10.96.50.4",
+    "jellyfin_ip": "",
+    "postgres_ip": "",
+    "keyclock_ip": "",
 
     "ldap_enable": false,
     "apache_enable": false,
-    "mariadb_enable": true,
-    "wiki_enable": true,
-    "shlink_enable": true,
+    "mariadb_enable": false,
+    "wiki_enable": false,
+    "shlink_enable": false,
     "owncast_enable": false,
-    "jellyfin_enable": true,
+    "jellyfin_enable": false,
+    "postgres_enable": false,
+    "keycloack_enable": false,
 
     "mysql_root_pass": "pass",
 
@@ -66,7 +72,26 @@
 
     "apache_ldap_bind_dn": "CN=admin,DC=example,DC=com",
     "apache_ldap_bind_pass": "admin",
-    "apache_ldap_auth_url": "ldap://noctia-ldap:389/DC=example,DC=com?cn?sub?(objectClass=person)"
+    "apache_ldap_auth_url": "ldap://noctia-ldap:389/DC=example,DC=com?cn?sub?(objectClass=person)",
+
+    "postgres_user": "user",
+    "postgres_pass": "pass",
+    "postgres_db": "main_database",
+    "postgres_log_statement": "all",
+
+    "keycloak_admin_username": "admin",
+    "keycloak_admin_password": "admin",
+    "keycloak_proxy_headers": "xforwarded",
+    "keycloak_http_enabled": "true",
+    "keycloak_hostname": "",
+    "keycloak_hostname_strict": "false",
+    "keycloak_health_enabled": "true",
+    "keycloak_cache": "ispn",
+    "keycloak__db_url_database": "keycloak",
+    "keycloak_db_url_host": "postgres",
+    "keycloak_db": "postgres",
+    "keycloak_db_username": "keycloak",
+    "keycloak_db_password": "keycloak"
 
 
 }

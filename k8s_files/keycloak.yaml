@@ -1,0 +1,132 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${app_name}-keycloak
+  labels:
+    app: ${app_name}-keycloak
+spec:
+  type: ClusterIP
+  clusterIP: ${keycloak_ip}
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: http
+      name: http
+  selector:
+    app: ${app_name}-keycloak
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ${app_name}-keycloak
+  name: ${app_name}-keycloak-discovery
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: ${app_name}-keycloak
+
+
+---
+apiVersion: apps/v1
+# Use a stateful setup to ensure that for a rolling update Pods are restarted with a rolling strategy one-by-one.
+# This prevents losing in-memory information stored redundantly in two Pods.
+kind: StatefulSet
+metadata:
+  name: ${app_name}-keycloak
+  labels:
+    app: ${app_name}-keycloak
+spec:
+  serviceName: ${app_name}-keycloak-discovery
+  # Run with one replica to save resources, or with two replicas to allow for rolling updates for configuration changes
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ${app_name}-keycloak
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: ${keycloak_image}
+          args: ["start"]
+          env:
+            - name: KC_BOOTSTRAP_ADMIN_USERNAME
+              value: "${keycloak_admin_username}"
+            - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+              value: "${keycloak_admin_password}"
+            # In a production environment, add a TLS certificate to Keycloak to either end-to-end encrypt the traffic between
+            # the client or Keycloak, or to encrypt the traffic between your proxy and Keycloak.
+            # Respect the proxy headers forwarded by the reverse proxy
+            # In a production environment, verify which proxy type you are using, and restrict access to Keycloak
+            # from other sources than your proxy if you continue to use proxy headers.
+            - name: KC_PROXY_HEADERS
+              value: "${keycloak_proxy_headers}"
+            - name: KC_HTTP_ENABLED
+              value: "${keycloak_http_enabled}"
+            # In this explorative setup, no strict hostname is set.
+            # For production environments, set a hostname for a secure setup.
+            - name: KC_HOSTNAME
+              value: "${keycloak_hostname}"
+            - name: KC_HOSTNAME_STRICT
+              value: "${keycloak_hostname_strict}"
+            - name: KC_HEALTH_ENABLED
+              value: "${keycloak_health_enabled}"
+            - name: 'KC_CACHE'
+              value: '${keycloak_cache}'
+            # Passing the Pod's IP primary address to the JGroups clustering as this is required in IPv6 only setups
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            # Instruct JGroups which DNS hostname to use to discover other Keycloak nodes
+            # Needs to be unique for each Keycloak cluster
+            - name: KC_CACHE_EMBEDDED_NETWORK_BIND_ADDRESS
+              value: '$(POD_IP)'
+            - name: 'KC_DB_URL_DATABASE'
+              value: '${keycloak__db_url_database}'
+            - name: 'KC_DB_URL_HOST'
+              value: '${keycloak_db_url_host}'
+            - name: 'KC_DB'
+              value: '${keycloak_db}'
+            # In a production environment, use a secret to store username and password to the database
+            - name: 'KC_DB_PASSWORD'
+              value: '${keycloak_db_password}'
+            - name: 'KC_DB_USERNAME'
+              value: '${keycloak_db_username}'
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: jgroups
+              containerPort: 7800
+            - name: jgroups-fd
+              containerPort: 57800
+          startupProbe:
+            httpGet:
+              path: /health/started
+              port: 9000
+            periodSeconds: 1
+            failureThreshold: 600
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 9000
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 9000
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 2000Mi
+            requests:
+              cpu: 500m
+              memory: 1700Mi
+

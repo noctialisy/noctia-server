@@ -57,6 +57,10 @@ def main():
                             continue
                         if settings["jellyfin_enable"] == False and "jellyfin" in fname:
                             continue
+                        if settings["postgres_enable"] == False and "postgres" in fname:
+                            continue
+                        if settings["keycloak_enable"] == False and "keycloak" in fname:
+                            continue
 
                         # Make a first copy of the original file
                         shutil.copy2(os.path.join(src,fname), os.path.join(trg,fname))

@@ -1,0 +1,58 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ${app_name}-postgres
+  name: ${app_name}-postgres
+spec:
+  type: ClusterIP
+  clusterIP: ${postgres_ip}
+  selector:
+    app: ${app_name}-postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+
+---
+# This is deployment of PostgreSQL with an ephemeral storage for testing: Once the Pod stops, the data is lost.
+# For a production setup, replace it with a database setup that persists your data.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-postgres
+  labels:
+    app: ${app_name}-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-postgres
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: "${postgres_image}"
+          env:
+            - name: POSTGRES_USER
+              value: "${postgres_user}"
+            - name: POSTGRES_PASSWORD
+              value: "${postgres_pass}"
+            - name: POSTGRES_DB
+              value: "${postgres_db}"
+            - name: POSTGRES_LOG_STATEMENT
+              value: "${postgres_log_statement}"
+          ports:
+            - name: postgres
+              containerPort: 5432
+          volumeMounts:
+            # Using volume mount for PostgreSQL's data folder as it is otherwise not writable
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-data
+          emptyDir: {}
