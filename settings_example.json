@@ -27,7 +27,7 @@
     "owncast_ip": "",
     "jellyfin_ip": "",
     "postgres_ip": "",
-    "keyclock_ip": "",
+    "keycloak_ip": "",
 
     "ldap_enable": false,
     "apache_enable": false,
