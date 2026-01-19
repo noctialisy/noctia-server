@@ -9,7 +9,7 @@
     "server_address": "https://kubernetes.docker.internal",
 
     "web_image": "php:8.2-fpm",
-    "mysql_image": "mariadb:11.7",
+    "mariadb_image": "mariadb:11.7",
     "ldap_image": "osixia/openldap:1.5.0",
     "wiki_image": "mediawiki:1.43.0",
     "shlink_image": "shlinkio/shlink:stable",
@@ -39,7 +39,7 @@
     "postgres_enable": false,
     "keycloack_enable": false,
 
-    "mysql_root_pass": "pass",
+    "mariadb_root_pass": "pass",
 
     "shlink_default_domain": "re.example.com",
     "shlink_server_url": "https://re.example.com",

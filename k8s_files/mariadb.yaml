@@ -8,7 +8,7 @@ spec:
   selector:
     app: ${app_name}-mariadb
   ports:
-    - name: "mysql"
+    - name: "mariadb"
       protocol: TCP
       port: 3306
       targetPort: 3306
@@ -35,9 +35,9 @@ spec:
         configMap:
           name: ${app_name}-web-conf
 
-      - name: ${app_name}-mysql-storage
+      - name: ${app_name}-mariadb-storage
         hostPath:
-          path: "${target_deploy_path}/${app_name}-mysql-pv"
+          path: "${target_deploy_path}/${app_name}-mariadb-pv"
 
       - name: ${app_name}-logs
         hostPath:
@@ -47,18 +47,18 @@ spec:
         - name: ${img_pull_sec}
 
       containers:
-      - name: mysql
-        image: "${mysql_image}"
+      - name: mariadb
+        image: "${mariadb_image}"
         imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: "200m"
             memory: "512M"
         ports:
-          - name: "mysql-server"
+          - name: "mariadb-server"
             containerPort: 3306
         volumeMounts:
-          - name: ${app_name}-mysql-storage
+          - name: ${app_name}-mariadb-storage
             mountPath: /var/lib/mysql
           - name: ${app_name}-web-conf
             mountPath: "/etc/mysql/mariadb.cnf"
@@ -68,4 +68,4 @@ spec:
         env:
           # Use secret in real usage
           - name: MYSQL_ROOT_PASSWORD
-            value: ${mysql_root_pass}
+            value: ${mariadb_root_pass}
