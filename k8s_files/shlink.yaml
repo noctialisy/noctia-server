@@ -40,6 +40,10 @@ spec:
         ports:
           - name: "main-port"
             containerPort: 8080
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256M
         env:
           - name: DEFAULT_DOMAIN
             value: "${shlink_default_domain}"

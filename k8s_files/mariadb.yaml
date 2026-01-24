@@ -65,6 +65,10 @@ spec:
             subPath: "mariadb.cnf"
           - name: ${app_name}-logs
             mountPath: "/var/log"
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512M
         env:
           # Use secret in real usage
           - name: MYSQL_ROOT_PASSWORD

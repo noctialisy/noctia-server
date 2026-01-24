@@ -229,7 +229,6 @@ spec:
           limits:
             cpu: "1000m"
             memory: "512M"
-            ephemeral-storage: "512M"
         volumeMounts:
           - name: ${app_name}-wiki-conf
             mountPath: "/var/www/html/LocalSettings.php"
