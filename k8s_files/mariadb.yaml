@@ -50,10 +50,6 @@ spec:
       - name: mariadb
         image: "${mariadb_image}"
         imagePullPolicy: IfNotPresent
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "512M"
         ports:
           - name: "mariadb-server"
             containerPort: 3306
@@ -67,8 +63,8 @@ spec:
             mountPath: "/var/log"
         resources:
           limits:
-            cpu: 1000m
-            memory: 512M
+            cpu: "200m"
+            memory: "512M"
         env:
           # Use secret in real usage
           - name: MYSQL_ROOT_PASSWORD
