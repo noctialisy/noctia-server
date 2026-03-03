@@ -3,6 +3,7 @@
     "main_ip": "10.96.50.1",
     "target": "rel",
     "target_deploy_path": "/projects/deploys",
+    "target_deploy_path_protected": "/projects/deploys",
 
     "server_name": "kubernetes.docker.internal",
     "server_hostname": "kubernetes.docker.internal",
@@ -16,6 +17,7 @@
     "jellyfin_image": "jellyfin/jellyfin:latest",
     "postgres_image": "mirror.gcr.io/postgres:17",
     "keycloak_image": "quay.io/keycloak/keycloak:26.5.1",
+    "seafile_image": "docker.seadrive.org/seafileltd/seafile-pro-mc:11.0-latest",
 
     "img_pull_sec": "your-k8s-sec-for-docker-registry",
 
@@ -28,6 +30,7 @@
     "jellyfin_ip": "",
     "postgres_ip": "",
     "keycloak_ip": "",
+    "seafile_ip": "",
 
     "ldap_enable": false,
     "apache_enable": false,
@@ -38,6 +41,7 @@
     "jellyfin_enable": false,
     "postgres_enable": false,
     "keycloack_enable": false,
+    "seafile_enable": true,
 
     "mariadb_root_pass": "pass",
 
@@ -67,7 +71,7 @@
 
     "ldap_organisation": "example",
     "ldap_domain": "example.com",
-    "ldap_adming_pass": "pass",
+    "ldap_admin_pass": "pass",
     "ldap_tls": "false",
 
     "apache_ldap_bind_dn": "CN=admin,DC=example,DC=com",
@@ -91,7 +95,15 @@
     "keycloak_db_url_host": "postgres",
     "keycloak_db": "postgres",
     "keycloak_db_username": "keycloak",
-    "keycloak_db_password": "keycloak"
+    "keycloak_db_password": "keycloak",
+
+    "seafile_db_host": "127.0.0.1",
+    "seafile_db_root_password": "pass",
+    "seafile_time_zone": "Europe/Berlin",
+    "seafile_admin_email": "admin@example.com",
+    "seafile_admin_password": "pass",
+    "seafile_server_letsenencrypt": "false",
+    "seafile_server_hostname": "example.com"
 
 
 }

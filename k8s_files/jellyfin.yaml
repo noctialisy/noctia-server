@@ -39,15 +39,15 @@ spec:
       volumes:
       - name: ${app_name}-jellyfin-config
         hostPath:
-          path: /projects/deploys/${app_name}-jellyfin-config
+          path: ${target_deploy_path}/${app_name}-jellyfin-config
 
       - name: ${app_name}-jellyfin-cache
         hostPath:
-          path: /projects/deploys/${app_name}-jellyfin-cache
+          path: ${target_deploy_path}/${app_name}-jellyfin-cache
 
       - name: ${app_name}-jellyfin-media
         hostPath:
-          path: /projects/deploys/${app_name}-jellyfin-media
+          path: ${target_deploy_path}/${app_name}-jellyfin-media
 
       imagePullSecrets:
         - name: ${img_pull_sec}
@@ -71,7 +71,7 @@ spec:
         resources:
           limits:
             cpu: 500m
-            memory: 500Mi
+            memory: 512M
         #env:
         #  - name: JELLYFIN_PublishedServerUrl
         #    value: 

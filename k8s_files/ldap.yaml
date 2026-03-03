@@ -48,6 +48,6 @@ spec:
           - name: LDAP_DOMAIN
             value: "${ldap_domain}"
           - name: LDAP_ADMIN_PASSWORD
-            value: "${ldap_adming_pass}"
+            value: "${ldap_admin_pass}"
           - name: LDAP_TLS
             value: "${ldap_tls}"

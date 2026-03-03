@@ -43,7 +43,7 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 256M
+            memory: 512M
         env:
           - name: DEFAULT_DOMAIN
             value: "${shlink_default_domain}"
