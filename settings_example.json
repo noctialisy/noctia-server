@@ -41,7 +41,7 @@
     "jellyfin_enable": false,
     "postgres_enable": false,
     "keycloack_enable": false,
-    "seafile_enable": true,
+    "seafile_enable": false,
 
     "mariadb_root_pass": "pass",
 
