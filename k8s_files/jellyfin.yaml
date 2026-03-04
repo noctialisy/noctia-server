@@ -13,7 +13,7 @@ spec:
       protocol: TCP
       port: 8096
       targetPort: 8096
-    - name: "http"
+    - name: "https"
       protocol: TCP
       port: 8097
       targetPort: 8097
