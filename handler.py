@@ -61,6 +61,8 @@ def main():
                             continue
                         if settings["keycloak_enable"] == False and "keycloak" in fname:
                             continue
+                        if settings["seafile_enable"] == False and "seafile" in fname:
+                            continue
 
                         # Make a first copy of the original file
                         shutil.copy2(os.path.join(src,fname), os.path.join(trg,fname))
