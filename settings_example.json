@@ -19,6 +19,9 @@
     "postgres_image": "mirror.gcr.io/postgres:17",
     "keycloak_image": "quay.io/keycloak/keycloak:26.5.1",
     "seafile_image": "docker.seadrive.org/seafileltd/seafile-pro-mc:11.0-latest",
+    "netbird_image": "netbirdio/reverse-proxy:latest",
+    "memcached_image": "memcached:1.6.18",
+    "searxng_image": "searxng/searxng:latest",
 
     "img_pull_sec": "your-k8s-sec-for-docker-registry",
 
@@ -32,6 +35,8 @@
     "postgres_ip": "",
     "keycloak_ip": "",
     "seafile_ip": "",
+    "netbird_ip": "",
+    "searxng_ip": "",
 
     "ldap_enable": false,
     "apache_enable": false,
@@ -43,6 +48,11 @@
     "postgres_enable": false,
     "keycloack_enable": false,
     "seafile_enable": false,
+    "netbird_enable": false,
+    "memcached_enable": true,
+    "searxng_enable": false,
+    "qdrant_enable": false,
+    "n8n_enable": false,
 
     "mariadb_root_pass": "pass",
 
@@ -104,7 +114,17 @@
     "seafile_admin_email": "admin@example.com",
     "seafile_admin_password": "pass",
     "seafile_server_letsenencrypt": "false",
-    "seafile_server_hostname": "example.com"
+    "seafile_server_hostname": "example.com",
+
+    "netbird_rp_certificates_dir": "/cert",
+    "netbird_rp_allow_insecure": "false",
+    "netbird_rp_management_address": "https://example.com",
+    "netbird_rp_acme_cert": "true",
+    "netbird_proxy_domain": "another-example.example.com",
+    "netbird_proxy_log_level": "info",
+    "netbird_proxy_token": "token_from_netbird",
+    "netbird_proxy_private": "true",
+    "netbird_proxy_address": ":8043"
 
 
 }

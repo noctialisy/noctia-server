@@ -1,0 +1,128 @@
+# SearXNG Kubernetes Manifest
+# Namespace: searxng
+# Usage: kubectl apply -f searxng.yaml
+#
+# Single-container self-hosted metasearch engine.
+# Resources: ~256 MB RAM, 0.5 CPU (light usage).
+#
+# The Service is pinned to ClusterIP 10.96.50.5 as requested.
+# Make sure that IP is within your cluster's service CIDR range.
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${app_name}-searxng-config
+data:
+  settings.yml: |
+    use_default_settings: true
+
+    general:
+      instance_name: "SearXNG"
+      enable_metrics: false
+
+    ui:
+      default_theme: simple
+      theme_args:
+        simple_style: auto
+
+    server:
+      limiter: false
+      public_instance: false
+      secret_key: "please-change-this-to-a-random-secret-key"
+      image_proxy: true
+
+    search:
+      formats:
+        - html
+        - json
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-searxng
+  labels:
+    app: ${app_name}-searxng
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-searxng
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-searxng
+    spec:
+      securityContext:
+        fsGroup: 977
+      containers:
+        - name: searxng
+          image: ${searxng_image}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: INSTANCE_NAME
+              value: "SearXNG"
+            - name: BASE_URL
+              value: "/"
+            - name: SEARXNG_PORT
+              value: "8080"
+            - name: GRANIAN_PORT
+              value: "8080"
+            - name: FORCE_OWNERSHIP
+              value: "false"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: config
+              mountPath: /etc/searxng/settings.yml
+              subPath: settings.yml
+              readOnly: true
+            - name: data
+              mountPath: /etc/searxng
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
+      volumes:
+        - name: config
+          configMap:
+            name: ${app_name}-searxng-config
+        - name: data
+          hostPath:
+            path: ${target_deploy_path}/noctia-searxng
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${app_name}-searxng
+spec:
+  type: ClusterIP
+  clusterIP: ${searxng_ip}
+  selector:
+    app: ${app_name}-searxng
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP

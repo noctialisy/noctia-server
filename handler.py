@@ -63,6 +63,16 @@ def main():
                             continue
                         if settings["seafile_enable"] == False and "seafile" in fname:
                             continue
+                        if settings["netbird_enable"] == False and "netbird" in fname:
+                            continue
+                        if settings["memcached_enable"] == False and "memcached" in fname:
+                            continue
+                        if settings["searxng_enable"] == False and "searxng" in fname:
+                            continue
+                        if settings["qdrant_enable"] == False and "qdrant" in fname:
+                            continue
+                        if settings["n8n_enable"] == False and "n8n" in fname:
+                            continue
 
                         # Make a first copy of the original file
                         shutil.copy2(os.path.join(src,fname), os.path.join(trg,fname))
