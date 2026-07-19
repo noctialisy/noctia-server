@@ -3,6 +3,7 @@
     "main_ip": "10.96.50.1",
     "target": "rel",
     "target_deploy_path": "/projects/deploys",
+    "target_deploy_path_local": "/projects/deploys_local",
     "target_deploy_path_protected": "/projects/deploys",
 
     "server_name": "kubernetes.docker.internal",
