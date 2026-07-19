@@ -22,23 +22,23 @@ spec:
             - containerPort: 8043
           env:
             - name: NB_PROXY_CERTIFICATE_DIRECTORY
-              value: ${netbird_rp_certificates_dir}
+              value: "${netbird_rp_certificates_dir}"
             - name: NB_PROXY_ALLOW_INSECURE
-              value: ${netbird_rp_allow_insecure}
+              value: "${netbird_rp_allow_insecure}"
             - name: NB_PROXY_MANAGEMENT_ADDRESS
-              value: ${netbird_rp_management_address}
+              value: "${netbird_rp_management_address}"
             - name: NB_PROXY_ACME_CERTIFICATES
-              value: ${netbird_rp_acme_cert}
+              value: "${netbird_rp_acme_cert}"
             - name: NB_PROXY_DOMAIN
-              value: ${netbird_proxy_domain}
+              value: "${netbird_proxy_domain}"
             - name: NB_PROXY_LOG_LEVEL
-              value: ${netbird_proxy_domain}
+              value: "${netbird_proxy_domain}"
             - name: NB_PROXY_TOKEN
-              value: ${netbird_proxy_token}
+              value: "${netbird_proxy_token}"
             - name: NB_PROXY_PRIVATE
-              value: ${netbird_proxy_private}
+              value: "${netbird_proxy_private}"
             - name: NB_PROXY_ADDRESS
-              value: ${netbird_proxy_address}
+              value: "${netbird_proxy_address}"
           volumeMounts:
             - name: certs
               mountPath: /certs
