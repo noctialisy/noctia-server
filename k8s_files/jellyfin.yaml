@@ -76,8 +76,8 @@ spec:
             containerPort: 7359
         resources:
           limits:
-            cpu: 500m
-            memory: 512M
+            cpu: 1000m
+            memory: 1024M
         #env:
         #  - name: JELLYFIN_PublishedServerUrl
         #    value: 
