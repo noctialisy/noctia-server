@@ -45,7 +45,7 @@ spec:
       volumes:
         - name: certs
           hostPath:
-            path: /opt/noctialisy/deploys/certs
+            path: ${target_deploy_path}/certs
 
 ---
 apiVersion: v1
