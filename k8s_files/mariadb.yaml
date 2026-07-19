@@ -37,14 +37,11 @@ spec:
 
       - name: ${app_name}-mariadb-storage
         hostPath:
-          path: "${target_deploy_path}/${app_name}-mariadb-pv"
+          path: "${target_deploy_path_local}/${app_name}-mariadb-pv"
 
       - name: ${app_name}-logs
         hostPath:
-          path: "${target_deploy_path}/${app_name}-logs-pv"
-
-      imagePullSecrets:
-        - name: ${img_pull_sec}
+          path: "${target_deploy_path_local}/${app_name}-logs-pv"
 
       containers:
       - name: mariadb
