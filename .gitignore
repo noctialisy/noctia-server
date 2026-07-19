@@ -15,3 +15,4 @@ mariadb/dbbase/*
 
 docker_secr.yaml
 settings.json
+*-private.*
