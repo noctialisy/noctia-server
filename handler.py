@@ -73,6 +73,8 @@ def main():
                             continue
                         if settings["n8n_enable"] == False and "n8n" in fname:
                             continue
+                        if settings["openwebui_enable"] == False and "openwebui" in fname:
+                            continue
 
                         # Make a first copy of the original file
                         shutil.copy2(os.path.join(src,fname), os.path.join(trg,fname))

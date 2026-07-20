@@ -22,6 +22,7 @@
     "netbird_image": "netbirdio/reverse-proxy:latest",
     "memcached_image": "memcached:1.6.18",
     "searxng_image": "searxng/searxng:latest",
+    "openwebui_image": "ghcr.io/open-webui/open-webui:main",
 
     "img_pull_sec": "your-k8s-sec-for-docker-registry",
 
@@ -37,6 +38,7 @@
     "seafile_ip": "",
     "netbird_ip": "",
     "searxng_ip": "",
+    "openwebui_ip": "",
 
     "ldap_enable": false,
     "apache_enable": false,
@@ -53,6 +55,7 @@
     "searxng_enable": false,
     "qdrant_enable": false,
     "n8n_enable": false,
+    "openwebui_enable": false,
 
     "mariadb_root_pass": "pass",
 
