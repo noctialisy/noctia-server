@@ -33,6 +33,10 @@ spec:
     spec:
       imagePullSecrets:
         - name: ${img_pull_sec}
+      dnsConfig:
+        nameservers:
+          - "8.8.8.8"
+          - "1.1.1.1"
       containers:
       - name: main
         image: "${shlink_image}"
