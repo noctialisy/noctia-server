@@ -120,7 +120,7 @@
     "seafile_server_letsenencrypt": "false",
     "seafile_server_hostname": "example.com",
 
-    "netbird_rp_certificates_dir": "/cert",
+    "netbird_rp_certificates_dir": "/certs",
     "netbird_rp_allow_insecure": "false",
     "netbird_rp_management_address": "https://example.com",
     "netbird_rp_acme_cert": "true",
