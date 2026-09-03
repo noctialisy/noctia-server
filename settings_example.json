@@ -18,7 +18,7 @@
     "jellyfin_image": "jellyfin/jellyfin:latest",
     "postgres_image": "mirror.gcr.io/postgres:17",
     "keycloak_image": "quay.io/keycloak/keycloak:26.5.1",
-    "seafile_image": "docker.seadrive.org/seafileltd/seafile-pro-mc:13.0-latest",
+    "seafile_image": "docker.seadrive.org/seafileltd/seafile-pro-mc:11.0-latest",
     "netbird_image": "netbirdio/reverse-proxy:latest",
     "memcached_image": "memcached:1.6.18",
     "searxng_image": "searxng/searxng:latest",
