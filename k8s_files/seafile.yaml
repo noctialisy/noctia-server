@@ -56,20 +56,24 @@ spec:
               value: "true"
             - name: INIT_S3_USE_V4_SIGNATURE
               value: "true"
-            - name: DB_HOST
+            - name: SEAFILE_MYSQL_DB_HOST
               value: "${seafile_db_host}"
-            - name: DB_ROOT_PASSWD
+            - name: SEAFILE_MYSQL_DB_PORT
+              value: "${seafile_db_port}"
+            - name: INIT_SEAFILE_MYSQL_ROOT_PASSWORD
               value: "${seafile_db_root_password}" #db's password
             - name: TIME_ZONE
               value: "${seafile_time_zone}"
-            - name: SEAFILE_ADMIN_EMAIL
+            - name: INTI_SEAFILE_ADMIN_EMAIL
               value: "${seafile_admin_email}" #admin email
-            - name: SEAFILE_ADMIN_PASSWORD
+            - name: INIT_SEAFILE_ADMIN_PASSWORD
               value: "${seafile_admin_password}" #admin password
             - name: SEAFILE_SERVER_LETSENCRYPT
               value: "${seafile_server_letsenencrypt}"
             - name: SEAFILE_SERVER_HOSTNAME
               value: "${seafile_server_hostname}" #hostname
+            - name: MEMCACHED_HOST
+              value: "${seafile_memcached_host}"
           ports:
             - containerPort: 80
           #        - containerPort: 443
