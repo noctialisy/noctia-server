@@ -31,8 +31,31 @@ spec:
         - name: ${app_name}-seafile
           #        image: seafileltd/seafile-mc:9.0.10
           #        image: seafileltd/seafile-mc:11.0-latest
+          #        image: seafileltd/seafile-pro-mc:13.0-latest
           image: ${seafile_image}
           env:
+            - name: SEAF_SERVER_STORAGE_TYPE
+              value: "true"
+            - name: INIT_S3_STORAGE_BACKEND_CONFIG
+              value: "true"
+            - name: INIT_S3_COMMIT_BUCKET
+              value: "seafile-commit-objects"
+            - name: INIT_S3_FS_BUCKET
+              value: "seafile-fs-objects"
+            - name: INIT_S3_BLOCK_BUCKET
+              value: "seafile-block-objects"
+            - name: INIT_S3_KEY_ID
+              value: "${seafile_s3_key_id}"
+            - name: INIT_S3_SECRET_KEY
+              value: "${seafile_s3_secret_key}"
+            - name: INIT_S3_HOST
+              value: "${seafile_s3_host}" # Do not include http/https here
+            - name: INIT_S3_AWS_REGION
+              value: "${seafile_s3_aws_region}"
+            - name: INIT_S3_USE_HTTPS
+              value: "true"
+            - name: INIT_S3_USE_V4_SIGNATURE
+              value: "true"
             - name: DB_HOST
               value: "${seafile_db_host}"
             - name: DB_ROOT_PASSWD
