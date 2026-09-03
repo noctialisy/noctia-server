@@ -58,7 +58,7 @@ spec:
               value: "true"
             - name: DB_HOST
               value: "${seafile_db_host}"
-            - name: DB_ROOT_PASSWORD
+            - name: DB_ROOT_PASSWD
               value: "${seafile_db_root_password}" #db's password
             - name: TIME_ZONE
               value: "${seafile_time_zone}"
@@ -82,7 +82,7 @@ spec:
       volumes:
         - name: seafile-data
           hostPath:
-            path: ${target_deploy_path_protected}/${app_name}-seafile-data
+            path: ${target_deploy_path}/${app_name}-seafile-data
       restartPolicy: Always
       # to get image from protected repository
       imagePullSecrets:
