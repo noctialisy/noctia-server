@@ -63,13 +63,13 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_USER
-              value: ${N8N_SIDE_POSTGRES_USER}
+              value: "${N8N_SIDE_POSTGRES_USER}"
             - name: POSTGRES_PASSWORD
-              value: ${N8N_SIDE_POSTGRES_PASSWORD}
+              value: "${N8N_SIDE_POSTGRES_PASSWORD}"
             - name: POSTGRES_DB
-              value: ${N8N_SIDE_POSTGRES_DB}
+              value: "${N8N_SIDE_POSTGRES_DB}"
             - name: POSTGRES_INITDB_ARGS
-              value: ${N8N_SIDE_POSTGRES_INITDB_ARGS}
+              value: "${N8N_SIDE_POSTGRES_INITDB_ARGS}"
           securityContext:
             runAsUser: 999
             runAsGroup: 999
@@ -110,35 +110,35 @@ spec:
             - containerPort: 5678
           env:
             - name: N8N_HOST
-              value: ${N8N_HOST}
+              value: "${N8N_HOST}"
             - name: N8N_PORT
-              value: ${N8N_PORT}
+              value: "${N8N_PORT}"
             - name: N8N_PROTOCOL
-              value: ${N8N_PROTOCOL}
+              value: "${N8N_PROTOCOL}"
             - name: N8N_SECURE_COOKIE
-              value: ${N8N_SECURE_COOKIE}
+              value: "${N8N_SECURE_COOKIE}"
             - name: NODE_ENV
-              value: ${N8N_NODE_ENV}
+              value: "${N8N_NODE_ENV}"
             - name: DB_TYPE
-              value: ${N8N_DB_TYPE}
+              value: "${N8N_DB_TYPE}"
             - name: DB_POSTGRESDB_HOST
-              value: ${N8N_DB_POSTGRESDB_HOST}
+              value: "${N8N_DB_POSTGRESDB_HOST}"
             - name: DB_POSTGRESDB_PORT
-              value: ${N8N_DB_POSTGRESDB_PORT}
+              value: "${N8N_DB_POSTGRESDB_PORT}"
             - name: DB_POSTGRESDB_DATABASE
-              value: ${N8N_DB_POSTGRESDB_DATABASE}
+              value: "${N8N_DB_POSTGRESDB_DATABASE}"
             - name: DB_POSTGRESDB_USER
-              value: ${N8N_DB_POSTGRESDB_USER}
+              value: "${N8N_DB_POSTGRESDB_USER}"
             - name: DB_POSTGRESDB_PASSWORD
-              value: ${N8N_DB_POSTGRESDB_PASSWORD}
+              value: "${N8N_DB_POSTGRESDB_PASSWORD}"
             - name: N8N_EDITOR_BASE_URL
-              value: ${N8N_EDITOR_BASE_URL}
+              value: "${N8N_EDITOR_BASE_URL}"
             - name: WEBHOOK_URL
-              value: ${N8N_WEBHOOK_URL}
+              value: "${N8N_WEBHOOK_URL}"
             - name: N8N_TRUSTED_HOSTS
-              value: ${N8N_TRUSTED_HOSTS}
+              value: "${N8N_TRUSTED_HOSTS}"
             - name: N8N_DEFAULT_BINARY_DATA_MODE
-              value: ${N8N_DEFAULT_BINARY_DATA_MODE}
+              value: "${N8N_DEFAULT_BINARY_DATA_MODE}"
             - name: N8N_USER_MANAGEMENT_JWT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -198,5 +198,5 @@ metadata:
   name: ${app_name}-n8n-sec
 type: Opaque
 stringData:
-  jwt-secret: ${n8n_sec_jwt}
-  encryption-key: ${n8n_sec_enc}
+  jwt-secret: "${n8n_sec_jwt}"
+  encryption-key: "${n8n_sec_enc}"

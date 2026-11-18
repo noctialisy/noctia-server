@@ -39,11 +39,11 @@ spec:
             - name: INIT_S3_STORAGE_BACKEND_CONFIG
               value: "true"
             - name: INIT_S3_COMMIT_BUCKET
-              value: ${seafile_INIT_S3_COMMIT_BUCKET}
+              value: "${seafile_INIT_S3_COMMIT_BUCKET}"
             - name: INIT_S3_FS_BUCKET
-              value: ${seafile_INIT_S3_FS_BUCKET}
+              value: "${seafile_INIT_S3_FS_BUCKET}"
             - name: INIT_S3_BLOCK_BUCKET
-              value: ${seafile_INIT_S3_BLOCK_BUCKET}
+              value: "${seafile_INIT_S3_BLOCK_BUCKET}""
             - name: INIT_S3_KEY_ID
               value: "${seafile_s3_key_id}"
             - name: INIT_S3_SECRET_KEY
@@ -57,11 +57,11 @@ spec:
             - name: INIT_S3_USE_V4_SIGNATURE
               value: "true"
             - name: JWT_PRIVATE_KEY
-              value: ${seafile_JWT_PRIVATE_KEY}
+              value: "${seafile_JWT_PRIVATE_KEY}"
             - name: DB_HOST
               value: "${seafile_db_host}"
             - name: DB_PORT
-              value: ${seafile_db_port}
+              value: "${seafile_db_port}"
             - name: DB_ROOT_PASSWD
               value: "${seafile_db_root_password}" #db's password
             - name: TIME_ZONE

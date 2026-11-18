@@ -34,6 +34,6 @@ spec:
             - containerPort: 8880
           env:
             - name: USE_GPU
-              value: ${kokoro_USE_GPU}
+              value: "${kokoro_USE_GPU}"
             - name: PHONEMIZER_ESPEAK_PATH
-              value: ${kokoro_PHONEMIZER_ESPEAK_PATH}
+              value: "${kokoro_PHONEMIZER_ESPEAK_PATH}"
