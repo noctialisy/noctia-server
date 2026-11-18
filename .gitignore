@@ -4,6 +4,7 @@ app/*
 dev/*
 k8s_deploys/*
 certs/*
+tmp/*
 
 httpd/conf.d/.htpasswd
 httpd/conf.d/.htpasswd-personal

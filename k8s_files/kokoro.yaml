@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${app_name}-kokoro
+spec:
+  type: ClusterIP
+  clusterIP: ${kokoro_ip}
+  selector:
+    app: ${app_name}-kokoro
+  ports:
+    - protocol: TCP
+      port: 8880
+      targetPort: 8880
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${app_name}-kokoro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${app_name}-kokoro
+  template:
+    metadata:
+      labels:
+        app: ${app_name}-kokoro
+    spec:
+      containers:
+        - name: ${app_name}-kokoro
+          image: ${kokoro_image}
+          ports:
+            - containerPort: 8880
+          env:
+            - name: USE_GPU
+              value: ${kokoro_USE_GPU}
+            - name: PHONEMIZER_ESPEAK_PATH
+              value: ${kokoro_PHONEMIZER_ESPEAK_PATH}

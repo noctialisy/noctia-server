@@ -23,6 +23,10 @@
     "memcached_image": "memcached:1.6.18",
     "searxng_image": "searxng/searxng:latest",
     "openwebui_image": "ghcr.io/open-webui/open-webui:main",
+    "kokoro_image": "ghcr.io/remsky/kokoro-fastapi-cpu:latest",
+    "n8n_image": "n8nio/n8n:latest",
+    "n8n_image_pgres": "postgres:16-alpine",
+    "qdrant_image": "qdrant/qdrant:v1.13.4",
 
     "img_pull_sec": "your-k8s-sec-for-docker-registry",
 
@@ -39,6 +43,9 @@
     "netbird_ip": "",
     "searxng_ip": "",
     "openwebui_ip": "",
+    "kokoro_ip": "",
+    "n8n_ip": "",
+    "qdrant_ip": "",
 
     "ldap_enable": false,
     "apache_enable": false,
@@ -56,6 +63,7 @@
     "qdrant_enable": false,
     "n8n_enable": false,
     "openwebui_enable": false,
+    "kokoro_enable": false,
 
     "mariadb_root_pass": "pass",
 
@@ -117,12 +125,18 @@
     "seafile_s3_host": "bucket_host_http",
     "seafile_s3_aws_region": "bucket_region",
     "seafile_db_host": "127.0.0.1",
+    "seafile_db_port": "3306",
     "seafile_db_root_password": "pass",
     "seafile_time_zone": "Europe/Berlin",
     "seafile_admin_email": "admin@example.com",
     "seafile_admin_password": "pass",
     "seafile_server_letsenencrypt": "false",
     "seafile_server_hostname": "example.com",
+    "seafile_memcached_host": "memcached",
+    "seafile_INIT_S3_COMMIT_BUCKET": "",
+    "seafile_INIT_S3_FS_BUCKET": "",
+    "seafile_INIT_S3_BLOCK_BUCKET": "",
+    "seafile_JWT_PRIVATE_KEY": "your_key",
 
     "netbird_rp_certificates_dir": "/certs",
     "netbird_rp_allow_insecure": "false",
@@ -132,7 +146,33 @@
     "netbird_proxy_log_level": "info",
     "netbird_proxy_token": "token_from_netbird",
     "netbird_proxy_private": "true",
-    "netbird_proxy_address": ":8043"
+    "netbird_proxy_address": ":8043",
+
+    "kokoro_USE_GPU": "false",
+    "kokoro_PHONEMIZER_ESPEAK_PATH": "/usr/bin",
+
+    "n8n_sec_jwt": "",
+    "n8n_sec_enc": "",
+    "N8N_DB_TYPE": "postgresdb",
+    "N8N_DB_POSTGRESDB_HOST": "n8n-postgres",
+    "N8N_DB_POSTGRESDB_PORT": "5432",
+    "N8N_DB_POSTGRESDB_DATABASE": "n8n",
+    "N8N_DB_POSTGRESDB_USER": "n8n",
+    "N8N_DB_POSTGRESDB_PASSWORD": "pass",
+    "N8N_DEFAULT_BINARY_DATA_MODE": "filesystem",
+    "N8N_TRUSTED_HOSTS": "localhost",
+    "N8N_WEBHOOK_URL": "http://localhost",
+    "N8N_EDITOR_BASE_URL": "http://localhost",
+    "N8N_NODE_ENV": "production",
+    "N8N_SECURE_COOKIE": "false",
+    "N8N_PROTOCOL": "http",
+    "N8N_PORT": "5678",
+    "N8N_HOST": "localhost",
+    "N8N_SIDE_POSTGRES_USER": "n8n",
+    "N8N_SIDE_POSTGRES_PASSWORD": "pass",
+    "N8N_SIDE_POSTGRES_DB": "n8n",
+    "N8N_SIDE_POSTGRES_INITDB_ARGS": "--auth=trust"
+
 
 
 }

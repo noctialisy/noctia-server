@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qdrant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qdrant
+  template:
+    metadata:
+      labels:
+        app: qdrant
+    spec:
+      containers:
+        - name: qdrant
+          image: ${qdrant_image}
+          ports:
+            - containerPort: 6333
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: qdrant-storage
+              mountPath: /qdrant/storage
+      volumes:
+        - name: qdrant-storage
+          hostPath:
+            path: /opt/noctialisy/deploys/qdrant
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qdrant
+spec:
+  type: ClusterIP
+  clusterIP: ${qdrant_ip}
+  selector:
+    app: qdrant
+  ports:
+    - name: "http"
+      protocol: TCP
+      port: 6333
+      targetPort: 6333
