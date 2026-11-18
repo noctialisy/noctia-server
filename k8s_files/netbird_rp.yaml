@@ -39,6 +39,13 @@ spec:
               value: "${netbird_proxy_private}"
             - name: NB_PROXY_ADDRESS
               value: "${netbird_proxy_address}"
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "128M"
+            limits:
+              cpu: "1000m"
+              memory: "512M"
           volumeMounts:
             - name: certs
               mountPath: /certs

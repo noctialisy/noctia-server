@@ -75,9 +75,12 @@ spec:
           - name: "stream"
             containerPort: 7359
         resources:
+          requests:
+            cpu: "50m"
+            memory: "128M"
           limits:
-            cpu: 1000m
-            memory: 1024M
+            cpu: "1000m"
+            memory: "512M"
         #env:
         #  - name: JELLYFIN_PublishedServerUrl
         #    value: 

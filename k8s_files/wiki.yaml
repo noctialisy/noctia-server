@@ -226,6 +226,9 @@ spec:
         image: "${wiki_image}"
         imagePullPolicy: IfNotPresent
         resources:
+          requests:
+            cpu: "50m"
+            memory: "128M"
           limits:
             cpu: "1000m"
             memory: "512M"

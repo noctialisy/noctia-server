@@ -19,11 +19,11 @@ spec:
             - containerPort: 6333
           resources:
             requests:
+              cpu: "50m"
               memory: "128Mi"
-              cpu: "100m"
             limits:
-              memory: "512Mi"
               cpu: "500m"
+              memory: "512Mi"
           volumeMounts:
             - name: qdrant-storage
               mountPath: /qdrant/storage

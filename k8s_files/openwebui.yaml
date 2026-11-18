@@ -24,11 +24,11 @@ spec:
           #    value: "all"
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
+              cpu: "50m"
+              memory: "128M"
             limits:
-              memory: "1024Mi"
               cpu: "1000m"
+              memory: "512M"
           volumeMounts:
             - name: storage
               mountPath: /app/backend/data

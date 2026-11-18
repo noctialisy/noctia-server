@@ -76,6 +76,13 @@ spec:
               value: "${seafile_server_hostname}" #hostname
             - name: MEMCACHED_HOST
               value: "${seafile_memcached_host}"
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "128M"
+            limits:
+              cpu: "1000m"
+              memory: "512M"
           ports:
             - containerPort: 80
           #        - containerPort: 443
