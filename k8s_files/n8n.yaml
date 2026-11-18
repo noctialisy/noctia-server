@@ -109,12 +109,12 @@ spec:
             - name: N8N_USER_MANAGEMENT_JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: n8n-sec
+                  name: ${app_name}-n8n-sec
                   key: jwt-secret
             - name: N8N_ENCRYPTION_KEY
               valueFrom:
                 secretKeyRef:
-                  name: n8n-sec
+                  name: ${app_name}-n8n-sec
                   key: encryption-key
           resources:
             requests:
