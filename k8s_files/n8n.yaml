@@ -53,8 +53,8 @@ spec:
               subPath: postgres
       volumes:
         - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: n8n-data
+          hostPath:
+            path: "${target_deploy_path_local}/noctia-n8n"
 ---
 apiVersion: apps/v1
 kind: Deployment
