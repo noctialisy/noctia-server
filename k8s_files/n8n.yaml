@@ -1,36 +1,3 @@
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: manual
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ${app_name}-n8n
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: "${target_deploy_path_local}/noctia-n8n"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ${app_name}-n8n-data
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -165,8 +132,8 @@ spec:
               subPath: trusted-certs
       volumes:
         - name: n8n-storage
-          persistentVolumeClaim:
-            claimName: n8n-data
+          hostPath:
+            path: "${target_deploy_path_local}/noctia-n8n"
 ---
 apiVersion: v1
 kind: Service
