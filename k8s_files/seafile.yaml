@@ -82,7 +82,7 @@ spec:
               memory: "128M"
             limits:
               cpu: "1000m"
-              memory: "512M"
+              memory: "2G"
           ports:
             - containerPort: 80
           #        - containerPort: 443

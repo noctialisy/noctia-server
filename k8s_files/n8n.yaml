@@ -118,11 +118,11 @@ spec:
                   key: encryption-key
           resources:
             requests:
-              memory: "256Mi"
               cpu: "200m"
+              memory: "256M"
             limits:
-              memory: "1024Mi"
               cpu: "1000m"
+              memory: "1G"
           volumeMounts:
             - name: n8n-storage
               mountPath: /home/node/.n8n
