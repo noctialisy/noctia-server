@@ -37,6 +37,8 @@ spec:
           ports:
             - containerPort: 8880
           env:
+            - name: KOKORO_API_KEY
+              value: "${KOKORO_API_KEY}"
             - name: USE_GPU
               value: "${kokoro_USE_GPU}"
             - name: PHONEMIZER_ESPEAK_PATH

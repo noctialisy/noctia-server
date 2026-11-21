@@ -148,6 +148,7 @@
     "netbird_proxy_private": "true",
     "netbird_proxy_address": ":8043",
 
+    "KOKORO_API_KEY": "",
     "kokoro_USE_GPU": "false",
     "kokoro_PHONEMIZER_ESPEAK_PATH": "/usr/bin",
 
