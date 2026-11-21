@@ -27,10 +27,6 @@ spec:
       labels:
         app: ${app_name}-kokoro
     spec:
-      volumes:
-        - name: kokoro-storage
-          hostPath:
-            path: "${target_deploy_path_local}/kokoro"
       containers:
         - name: ${app_name}-kokoro
           image: ${kokoro_image}
@@ -52,6 +48,3 @@ spec:
             limits:
               cpu: "4000m"
               memory: "2G"
-          volumeMounts:
-            - name: kokoro-storage
-              mountPath: "/var/lib/kokoro"
